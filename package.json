@@ -1,6 +1,6 @@
 {
   "name": "@stinsky/xray",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "React dev inspector — hover to see component names, click to open source in your editor. Works with React 19 + Turbopack.",
   "license": "MIT",
   "type": "module",
