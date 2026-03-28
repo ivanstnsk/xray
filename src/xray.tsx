@@ -6,6 +6,7 @@ import { createPortal } from 'react-dom'
 import { useBadge } from './use-badge'
 import { useHotkey, DEFAULT_HOT_KEY, type HotKey } from './use-hotkey'
 import { useInspector } from './use-inspector'
+import { useNextIndicator } from './use-next-indicator'
 
 // --- Types ---
 
@@ -50,8 +51,10 @@ function XrayImpl({
   const toggle = useCallback(() => setEnabled((prev) => !prev), [])
 
   useEffect(() => setMounted(true), [])
+  const { element: anchor, isDragging, searching } = useNextIndicator(followNextIndicator)
+
   useHotkey(hotKey, toggle)
-  useBadge({ badgeRef, show: showButton, followNextIndicator })
+  useBadge({ badgeRef, show: showButton && !searching, anchor, anchorDragging: isDragging, onTap: toggle })
   useInspector({
     enabled,
     port,
@@ -107,13 +110,10 @@ function XrayImpl({
             width: '36px',
             height: '36px',
             transformOrigin: 'center center',
+            scale: '0',
           }}
         >
           <button
-            onClick={(e) => {
-              e.stopPropagation()
-              toggle()
-            }}
             style={{
               width: '36px',
               height: '36px',
