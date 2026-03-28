@@ -1,6 +1,10 @@
-# @stinsky/xray
+<p align="center">
+  <img src="assets/logo.svg" width="160" alt="xray logo" />
+</p>
 
-Click-to-component for React 19. Hover any element to see its React component name and source file, click to open in your editor. The only click-to-source inspector that works with React 19, Next.js 15+, and Turbopack.
+<h1 align="center">@stinsky/xray</h1>
+
+<p align="center">Click-to-component for React 19. Hover any element to see its React component name and source file, click to open in your editor. The only click-to-source inspector that works with React 19, Next.js 15+, and Turbopack.</p>
 
 [![npm version](https://img.shields.io/npm/v/@stinsky/xray)](https://www.npmjs.com/package/@stinsky/xray)
 [![license](https://img.shields.io/npm/l/@stinsky/xray)](./LICENSE)

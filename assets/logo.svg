@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
+  <defs>
+    <!-- Halftone dot pattern -->
+    <pattern id="halftone" x="0" y="0" width="8" height="8" patternUnits="userSpaceOnUse">
+      <circle cx="4" cy="4" r="1.5" fill="#6366f1" opacity="0.3"/>
+    </pattern>
+    <!-- Burst gradient -->
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#818cf8" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#6366f1" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Background burst -->
+  <circle cx="256" cy="256" r="240" fill="url(#glow)"/>
+
+  <!-- Comic burst lines -->
+  <g stroke="#6366f1" stroke-width="2.5" opacity="0.18">
+    <line x1="256" y1="256" x2="256" y2="16"/>
+    <line x1="256" y1="256" x2="426" y2="56"/>
+    <line x1="256" y1="256" x2="496" y2="176"/>
+    <line x1="256" y1="256" x2="496" y2="336"/>
+    <line x1="256" y1="256" x2="426" y2="456"/>
+    <line x1="256" y1="256" x2="256" y2="496"/>
+    <line x1="256" y1="256" x2="86" y2="456"/>
+    <line x1="256" y1="256" x2="16" y2="336"/>
+    <line x1="256" y1="256" x2="16" y2="176"/>
+    <line x1="256" y1="256" x2="86" y2="56"/>
+  </g>
+
+  <!-- Outer ring -->
+  <circle cx="256" cy="256" r="180" stroke="#6366f1" stroke-width="6" fill="none" opacity="0.15"/>
+  <circle cx="256" cy="256" r="180" fill="url(#halftone)"/>
+
+  <!-- Inner ring with comic thick stroke -->
+  <circle cx="256" cy="256" r="120" stroke="#6366f1" stroke-width="8" fill="none" opacity="0.25"/>
+
+  <!-- Crosshair lines -->
+  <g stroke="#6366f1" stroke-width="3" opacity="0.35">
+    <line x1="256" y1="76" x2="256" y2="176"/>
+    <line x1="256" y1="336" x2="256" y2="436"/>
+    <line x1="76" y1="256" x2="176" y2="256"/>
+    <line x1="336" y1="256" x2="436" y2="256"/>
+  </g>
+
+  <!-- Center eye shape -->
+  <path d="M160 256 C160 200, 220 148, 256 148 C292 148, 352 200, 352 256 C352 312, 292 364, 256 364 C220 364, 160 312, 160 256Z"
+        fill="#0f0f23" stroke="#6366f1" stroke-width="6"/>
+
+  <!-- Iris -->
+  <circle cx="256" cy="256" r="52" fill="#6366f1"/>
+  <circle cx="256" cy="256" r="52" fill="url(#halftone)" opacity="0.5"/>
+
+  <!-- Pupil -->
+  <circle cx="256" cy="256" r="24" fill="#0f0f23"/>
+
+  <!-- Eye highlight -->
+  <circle cx="240" cy="242" r="10" fill="white" opacity="0.7"/>
+  <circle cx="270" cy="260" r="5" fill="white" opacity="0.4"/>
+
+  <!-- Bold X overlay -->
+  <g stroke="#c7d2fe" stroke-width="10" stroke-linecap="round" opacity="0.9">
+    <line x1="186" y1="186" x2="222" y2="222"/>
+    <line x1="326" y1="186" x2="290" y2="222"/>
+    <line x1="186" y1="326" x2="222" y2="290"/>
+    <line x1="326" y1="326" x2="290" y2="290"/>
+  </g>
+
+  <!-- Comic-style "XRAY" text at bottom -->
+  <g transform="translate(256, 462)">
+    <text text-anchor="middle" font-family="'Impact', 'Arial Black', sans-serif" font-size="48" font-weight="900" letter-spacing="8">
+      <tspan fill="#0f0f23" stroke="#6366f1" stroke-width="5" paint-order="stroke">XRAY</tspan>
+    </text>
+  </g>
+
+  <!-- Small comic speed lines around eye -->
+  <g stroke="#818cf8" stroke-width="2" stroke-linecap="round" opacity="0.5">
+    <line x1="130" y1="220" x2="110" y2="210"/>
+    <line x1="130" y1="256" x2="106" y2="256"/>
+    <line x1="130" y1="292" x2="110" y2="302"/>
+    <line x1="382" y1="220" x2="402" y2="210"/>
+    <line x1="382" y1="256" x2="406" y2="256"/>
+    <line x1="382" y1="292" x2="402" y2="302"/>
+  </g>
+</svg>
