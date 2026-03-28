@@ -137,6 +137,10 @@ All clicks and pointer events are blocked while the inspector is active, so you 
 | `bundler` | `'webpack' \| 'vite' \| 'turbopack' \| 'rspack' \| 'esbuild'` | — | **Required.** Your bundler |
 | `editor` | `string` | `'code'` | Editor to open files in (`code`, `webstorm`, `idea`, etc.) |
 
+## Acknowledgments
+
+Built on top of [`code-inspector-plugin`](https://github.com/zh-lx/code-inspector), which handles the compile-time AST injection and editor integration.
+
 ## License
 
 MIT
