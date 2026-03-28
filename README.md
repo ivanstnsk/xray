@@ -14,7 +14,7 @@
 </p>
 
 <p align="center">
-  <img src="assets/xray-preview.gif" width="600" alt="xray demo" />
+  <img src="assets/xray-preview.gif" width="100%" alt="xray demo" />
 </p>
 
 ## Features
