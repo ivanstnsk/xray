@@ -12,7 +12,7 @@ Click-to-component for React 19. Hover any element to see its React component na
 - **Works with React 19** — uses compile-time AST injection, not `fiber._debugSource` (removed in React 19)
 - **All bundlers** — Next.js (Turbopack & Webpack), Vite, Webpack, Rspack, esbuild
 - **Zero production cost** — fully tree-shaken, zero bytes in your production bundle
-- **Floating toggle button** — auto-positions next to the Next.js dev indicator, or bottom-left in other setups
+- **Floating toggle button** — auto-follows the Next.js dev indicator, or freely draggable with snap-to-corner in other setups
 - **Keyboard shortcut** — `Cmd+Shift+X` to toggle (customizable)
 - **Scroll-aware** — rAF-based tracking, works with smooth scrolling libraries (Lenis, etc.)
 - **Interaction blocking** — all clicks/pointer events blocked while inspecting, no accidental navigation
