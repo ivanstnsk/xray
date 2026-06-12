@@ -237,6 +237,20 @@ export function useInspector({
       updateOverlayPosition()
     }
 
+    // Update overlay on pointer down too. Critical for environments that
+    // don't fire hover events — most notably Chrome DevTools' device-mode
+    // (mobile emulation), where the rAF loop's elementFromPoint(0,0) is
+    // the only signal until a click arrives. On desktop this is a no-op
+    // because inspectTarget() dedups against currentTarget.
+    const handlePointerDown = (e: PointerEvent) => {
+      const target = e.target as Element | null
+      if (!target) return
+      mouseX = e.clientX
+      mouseY = e.clientY
+      inspectTarget(target)
+      updateOverlayPosition()
+    }
+
     const handleMouseLeave = () => {
       hideOverlay()
       currentTarget.current = null
@@ -252,10 +266,15 @@ export function useInspector({
     rafId = requestAnimationFrame(tick)
 
     window.addEventListener('mousemove', handleMouseMove)
+    // Capture phase so the click-blocker's stopPropagation() in the other
+    // effect doesn't prevent us from updating the overlay before the click
+    // handler fires the editor-open XHR.
+    window.addEventListener('pointerdown', handlePointerDown, true)
     document.addEventListener('mouseleave', handleMouseLeave)
     return () => {
       cancelAnimationFrame(rafId)
       window.removeEventListener('mousemove', handleMouseMove)
+      window.removeEventListener('pointerdown', handlePointerDown, true)
       document.removeEventListener('mouseleave', handleMouseLeave)
     }
   }, [enabled, overlayRef, tooltipRef, ignoreRefs])
