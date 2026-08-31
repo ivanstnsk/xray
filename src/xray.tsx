@@ -4,15 +4,22 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 
 import { useBadge } from './use-badge'
-import { useHotkey, DEFAULT_HOT_KEY, type HotKey } from './use-hotkey'
+import {
+  useHotkey,
+  DEFAULT_HOT_KEY,
+  type ActivationMode,
+  type HotKey,
+} from './use-hotkey'
 import { useInspector } from './use-inspector'
 import { useNextIndicator } from './use-next-indicator'
 
 // --- Types ---
 
 export interface XrayProps {
-  /** Keyboard shortcut to toggle. Default: Cmd+Shift+X */
+  /** Keyboard shortcut. Default: Cmd+Shift+X */
   hotKey?: HotKey
+  /** Keyboard activation behavior. Default: 'toggle' */
+  activationMode?: ActivationMode
   /** code-inspector-plugin server port. Default: 5678 */
   port?: number
   /** Accent color for overlay/tooltip/button. Default: '#6366f1' (indigo) */
@@ -37,23 +44,28 @@ function colorWithAlpha(hex: string, alpha: number): string {
 
 function XrayImpl({
   hotKey = DEFAULT_HOT_KEY,
+  activationMode = 'toggle',
   port = DEFAULT_PORT,
   color = DEFAULT_COLOR,
   showButton = true,
   followNextIndicator = true,
 }: XrayProps = {}) {
   const [mounted, setMounted] = useState(false)
-  const [enabled, setEnabled] = useState(false)
+  const [toggledEnabled, setToggledEnabled] = useState(false)
+  const [hotkeyHeld, setHotkeyHeld] = useState(false)
   const overlayRef = useRef<HTMLDivElement>(null)
   const tooltipRef = useRef<HTMLDivElement>(null)
   const badgeRef = useRef<HTMLDivElement>(null)
 
-  const toggle = useCallback(() => setEnabled((prev) => !prev), [])
+  const toggle = useCallback(() => setToggledEnabled((prev) => !prev), [])
+  const enable = useCallback(() => setHotkeyHeld(true), [])
+  const disable = useCallback(() => setHotkeyHeld(false), [])
+  const enabled = activationMode === 'hold' ? toggledEnabled || hotkeyHeld : toggledEnabled
 
   useEffect(() => setMounted(true), [])
   const { element: anchor, isDragging, searching } = useNextIndicator(followNextIndicator)
 
-  useHotkey(hotKey, toggle)
+  useHotkey(hotKey, toggle, { activationMode, onEnable: enable, onDisable: disable })
   useBadge({ badgeRef, show: showButton && !searching, anchor, anchorDragging: isDragging, onTap: toggle })
   useInspector({
     enabled,

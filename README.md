@@ -25,7 +25,7 @@
 - **All bundlers** — Next.js (Turbopack & Webpack), Vite, Webpack, Rspack, esbuild
 - **Zero production cost** — fully tree-shaken, zero bytes in your production bundle
 - **Floating toggle button** — auto-follows the Next.js dev indicator, or freely draggable with snap-to-corner in other setups
-- **Keyboard shortcut** — `Cmd+Shift+X` to toggle (customizable)
+- **Keyboard shortcut** — `Cmd+Shift+X` to toggle (customizable; can also use hold-to-inspect)
 - **Scroll-aware** — rAF-based tracking, works with smooth scrolling libraries (Lenis, etc.)
 - **Interaction blocking** — all clicks/pointer events blocked while inspecting, no accidental navigation
 
@@ -128,11 +128,14 @@ The component is fully tree-shaken in production — zero bytes in your bundle. 
 
 All clicks and pointer events are blocked while the inspector is active, so you won't accidentally trigger links or buttons.
 
+To inspect only while holding the keyboard shortcut, set `activationMode="hold"`. A matching keydown enables inspection and releasing the configured key or any required modifier disables it. Repeated keydown events are ignored. Hold activation is also released when the window blurs or the document becomes hidden, which covers the case where clicking an inspected element opens your editor before the browser delivers keyup. The floating button continues to toggle independently.
+
 ## Props
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `hotKey` | `{ metaKey?, ctrlKey?, altKey?, shiftKey?, key }` | `{ metaKey: true, shiftKey: true, key: 'x' }` | Keyboard shortcut to toggle |
+| `hotKey` | `{ metaKey?, ctrlKey?, altKey?, shiftKey?, key }` | `{ metaKey: true, shiftKey: true, key: 'x' }` | Keyboard shortcut used by `activationMode` |
+| `activationMode` | `'toggle' \| 'hold'` | `'toggle'` | Keyboard behavior: toggle on each matching keydown, or enable on keydown and disable on keyup. Hold activation also ends on window blur/document visibility loss. The floating button always toggles independently. |
 | `port` | `number` | `5678` | `code-inspector-plugin` server port |
 | `color` | `string` | `'#6366f1'` | Accent color for overlay, tooltip, and button |
 | `showButton` | `boolean` | `true` | Show the floating toggle button |
